@@ -1,0 +1,72 @@
+<HTML>
+<BODY BGCOLOR="#E0E0E0" TEXT="#000000">
+<FONT SIZE="5" COLOR="#000040">frmTest</FONT>
+<HR SIZE="10" WIDTH="100%">
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Client_DataArrival<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>Data<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> String)</font>
+<br>
+TextIn.Text = Data
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Command1_Click()
+<br>
+Client.LocalPort = 1192
+<br>
+Client.RemotePort = 1193
+<br>
+Client.Protocol = sckTCPProtocol
+<br>
+Server.LocalPort = 1193
+<br>
+Server.Protocol = sckTCPProtocol
+<br>
+Client.Connect
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Command2_Click()
+<br>
+Client.Disconnect
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Command3_Click()
+<br>
+Client.SendData TextIn.Text
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Command4_Click()
+<br>
+Server.SendData 1, TextOut.Text
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Form_Load()
+<br>
+MsgBox Client.LocalHostName & "|" & Client.LocalIP
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Server_DataArrival<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>Data<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> String)</font>
+<br>
+TextOut.Text = Data
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<HR SIZE="10" WISTH="100%">This page was created by the VB->HTML Compiler, made by Cory J. Geesaman, <A HREF="http://www.naven.net/">http://www.naven.net/</A></BODY>
+</HTML>

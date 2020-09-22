@@ -1,0 +1,101 @@
+VERSION 5.00
+Begin VB.PropertyPage ppServer 
+   Caption         =   "Server &Settings"
+   ClientHeight    =   2550
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   4770
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   2550
+   ScaleWidth      =   4770
+   Begin VB.Frame Frame3 
+      Caption         =   "Connection &Settings"
+      Height          =   1095
+      Left            =   120
+      TabIndex        =   6
+      Top             =   1320
+      Width           =   2175
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         ItemData        =   "PropertyPage1.pgx":0000
+         Left            =   240
+         List            =   "PropertyPage1.pgx":000A
+         Style           =   2  'Dropdown List
+         TabIndex        =   7
+         Top             =   600
+         Width           =   1695
+      End
+      Begin VB.Label Label3 
+         AutoSize        =   -1  'True
+         Caption         =   "Protocol:"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   8
+         Top             =   360
+         Width           =   630
+      End
+   End
+   Begin VB.Frame Frame2 
+      Caption         =   "&Connections"
+      Height          =   1575
+      Left            =   2450
+      TabIndex        =   3
+      Top             =   120
+      Width           =   2175
+      Begin VB.CheckBox Check1 
+         Caption         =   "Allow &New Users"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   9
+         Top             =   1080
+         Value           =   1  'Checked
+         Width           =   1695
+      End
+      Begin VB.TextBox Text1 
+         Height          =   285
+         Left            =   240
+         TabIndex        =   5
+         Top             =   600
+         Width           =   1695
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "&Max Users:"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   4
+         Top             =   360
+         Width           =   795
+      End
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "&Local Settings"
+      Height          =   1095
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   2175
+      Begin VB.TextBox lclPort 
+         Height          =   285
+         Left            =   240
+         TabIndex        =   1
+         Text            =   "1193"
+         Top             =   600
+         Width           =   1695
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Local &Port:"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   2
+         Top             =   360
+         Width           =   765
+      End
+   End
+End
+Attribute VB_Name = "ppServer"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
