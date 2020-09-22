@@ -1,0 +1,290 @@
+<HTML>
+<BODY BGCOLOR="#E0E0E0" TEXT="#000000">
+<FONT SIZE="5" COLOR="#000040">Server</FONT>
+<HR SIZE="10" WIDTH="100%">
+<br>
+<FONT NAME="Courier New" COLOR="#008000">'Event Declarations:</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Event</font> DataArrival<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>Data<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> String)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Event</font> SendComplete()
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Event</font> SendProgress<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>bytesSent<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>bytesRemaining<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Event</font> Disconnected<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Event</font> Connected<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font> vCurrentUsers<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> vMaxUsers<FONT NAME="Courier New" COLOR="#000080"> As </font>Integer
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Function </font>GetFreeSock()<FONT NAME="Courier New" COLOR="#000080"> As </font>Integer
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Function
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>About()
+<br>
+Attribute About.VB_UserMemId = -552
+<br>
+<FONT NAME="Courier New" COLOR="#000000">frmAbout.Show</font>
+<br>
+frmAbout.InitAboutBox False
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Sock_Close(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">RaiseEvent</font> Disconnected(Index)
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Sock_ConnectionRequest(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>requestID<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long)</font>
+<br>
+a = GetFreeSock
+<br>
+Sock(a).Accept requestID
+<br>
+Sock(a).SendData "Send_Connection_String"
+<br>
+<FONT NAME="Courier New" COLOR="#000080">RaiseEvent</font> Connected(a)
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>Protocol()<FONT NAME="Courier New" COLOR="#000080"> As </font>ProtocolConstants
+<br>
+    Protocol = Sock(0).Protocol
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Let </font>Protocol<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>New_Protocol<FONT NAME="Courier New" COLOR="#000080"> As </font>ProtocolConstants)
+<br>
+    Sock(0).Protocol = New_Protocol
+<br>
+    PropertyChanged "Protocol"
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>UserControl_Initialize()
+<br>
+UserControl_Resize
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>UserControl_Paint()
+<br>
+UserControl_Resize
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>UserControl_Resize()
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> UserControl.Width &lt&gt 385<FONT NAME="Courier New" COLOR="#000080"> Then </font>UserControl.Width = 385
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> UserControl.Height &lt&gt 385<FONT NAME="Courier New" COLOR="#000080"> Then </font>UserControl.Height = 385
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Bind(Optional<FONT NAME="Courier New" COLOR="#000080"> ByVal </font>LocalPort<FONT NAME="Courier New" COLOR="#000080"> As </font>Variant, Optional<FONT NAME="Courier New" COLOR="#000080"> ByVal </font>LocalIP<FONT NAME="Courier New" COLOR="#000080"> As </font>Variant)
+<br>
+Attribute Bind.VB_Description = "Binds socket to specific port and adapter"
+<br>
+    Sock(0).Bind LocalPort, LocalIP
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>BytesReceived()<FONT NAME="Courier New" COLOR="#000080"> As </font>Long
+<br>
+Attribute BytesReceived.VB_Description = "Returns the number of bytes received on this connection"
+<br>
+    BytesReceived = Sock(0).BytesReceived
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Sock_DataArrival(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>bytesTotal<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Dim</font> Data<FONT NAME="Courier New" COLOR="#000080"> As </font>String
+<br>
+Sock(Index).GetData Data, vbString, bytesTotal
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> RaiseEvent </font>DataArrival(Index, Data)
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Listen()
+<br>
+Attribute Listen.VB_Description = "Listen for incoming connection requests"
+<br>
+    Sock(0).Listen
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>LocalHostName()<FONT NAME="Courier New" COLOR="#000080"> As </font>String
+<br>
+Attribute LocalHostName.VB_Description = "Returns the local machine name"
+<br>
+    LocalHostName = Sock(0).LocalHostName
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>LocalIP()<FONT NAME="Courier New" COLOR="#000080"> As </font>String
+<br>
+Attribute LocalIP.VB_Description = "Returns the local machine IP address"
+<br>
+    LocalIP = Sock(0).LocalIP
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>LocalPort()<FONT NAME="Courier New" COLOR="#000080"> As </font>Long
+<br>
+Attribute LocalPort.VB_Description = "Returns/Sets the port used on the local computer"
+<br>
+    LocalPort = Sock(0).LocalPort
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Let </font>LocalPort<FONT NAME="Courier New" COLOR="#000080">(ByVal </font>New_LocalPort<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long)</font>
+<br>
+    Sock(0).LocalPort() = New_LocalPort
+<br>
+    PropertyChanged "LocalPort"
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>RemoteHost(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font><FONT NAME="Courier New" COLOR="#000080"> As </font>String
+<br>
+Attribute RemoteHost.VB_Description = "Returns/Sets the name used to identify the remote computer"
+<br>
+    RemoteHost = Sock(Index).RemoteHost
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>RemoteHostIP(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font><FONT NAME="Courier New" COLOR="#000080"> As </font>String
+<br>
+Attribute RemoteHostIP.VB_Description = "Returns the remote host IP address"
+<br>
+    RemoteHostIP = Sock(Index).RemoteHostIP
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Sock_SendComplete(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font>
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> RaiseEvent </font>SendComplete
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>SendData(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>Data<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> String)</font>
+<br>
+Attribute SendData.VB_Description = "Send data to remote computer"
+<br>
+    Sock(0).SendData Data
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Sock_SendProgress(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>bytesSent<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long,</font><FONT NAME="Courier New" COLOR="#000080"> ByVal </font>bytesRemaining<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Long)</font>
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> RaiseEvent </font>SendProgress(Index, bytesSent, bytesRemaining)
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>SocketHandle(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font><FONT NAME="Courier New" COLOR="#000080"> As </font>Long
+<br>
+Attribute SocketHandle.VB_Description = "Returns the socket handle"
+<br>
+    SocketHandle = Sock(Index).SocketHandle
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Property </font><FONT NAME="Courier New" COLOR="#000080"> Get </font>State(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font><FONT NAME="Courier New" COLOR="#000080"> As </font>Integer
+<br>
+Attribute State.VB_Description = "Returns the state of the socket connection"
+<br>
+    State = Sock(Index).State
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End</font> Property
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Disconnect(Index<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer)</font>
+<br>
+Attribute Disconnect.VB_Description = "Close current connection"
+<br>
+    Sock(Index)<FONT NAME="Courier New" COLOR="#000080">.Close</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>UserControl_ReadProperties(PropBag<FONT NAME="Courier New" COLOR="#000080"> As </font>PropertyBag)
+<br>
+    Sock(0).LocalPort = PropBag.ReadProperty("LocalPort", 0)
+<br>
+    Sock(0).RemoteHost = PropBag.ReadProperty("RemoteHost", "")
+<br>
+    Sock(0).Protocol = PropBag.ReadProperty("Protocol", 0)
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>UserControl_WriteProperties(PropBag<FONT NAME="Courier New" COLOR="#000080"> As </font>PropertyBag)
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> Call </font>PropBag.WriteProperty("LocalPort", Sock(0).LocalPort, 0)
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> Call </font>PropBag.WriteProperty("Protocol", Sock(0).Protocol, 0)
+<br>
+   <FONT NAME="Courier New" COLOR="#000080"> Call </font>PropBag.WriteProperty("RemoteHost", Sock(0).RemoteHost, "")
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<HR SIZE="10" WISTH="100%">This page was created by the VB->HTML Compiler, made by Cory J. Geesaman, <A HREF="http://www.naven.net/">http://www.naven.net/</A></BODY>
+</HTML>

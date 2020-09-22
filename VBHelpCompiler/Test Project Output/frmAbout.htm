@@ -1,0 +1,110 @@
+<HTML>
+<BODY BGCOLOR="#E0E0E0" TEXT="#000000">
+<FONT SIZE="5" COLOR="#000040">frmAbout</FONT>
+<HR SIZE="10" WIDTH="100%">
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font> OverLabel<FONT NAME="Courier New" COLOR="#000080"> As </font>Boolean
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Command1_Click()
+<br>
+Unload Me
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Form_Load()
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> App.Minor &lt 10<FONT NAME="Courier New" COLOR="#000080"> And </font>App.Revision &lt 10 Then
+<br>
+Label3.Caption = "v" & App.Major & "." & App.Minor & App.Revision
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Else</font>
+<br>
+Label3.Caption = "v" & App.Major & "." & App.Minor & "." & App.Revision
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End If</font>
+<br>
+Me.Caption = Me.Caption & " - " & Label3.Caption
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Public</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>InitAboutBox(Client<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Boolean)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> Client =<FONT NAME="Courier New" COLOR="#000080"> True </font>Then
+<br>
+sP.Visible = False
+<br>
+cP.Visible = True
+<br>
+Label1.Caption = "NSocks - Client"
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Else</font>
+<br>
+cP.Visible = False
+<br>
+sP.Visible = True
+<br>
+Label1.Caption = "NSocks - Server"
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End If</font>
+<br>
+Label2.Caption = Label1.Caption
+<br>
+Me.ZOrder 0
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Label5_MouseDown(Button<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> Shift<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> X<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single,</font> Y<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single)</font>
+<br>
+Label5_MouseMove Button, Shift, X, Y
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Label5_MouseMove(Button<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> Shift<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> X<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single,</font> Y<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> Button = 1 Then
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> X &lt 0<FONT NAME="Courier New" COLOR="#000080"> Or </font>Y &lt 0<FONT NAME="Courier New" COLOR="#000080"> Or </font>X &gt Label5.Width<FONT NAME="Courier New" COLOR="#000080"> Or </font>Y &gt Label5.Height Then
+<br>
+OverLabel = False
+<br>
+Label5.ForeColor = &HC0&
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Else</font>
+<br>
+OverLabel = True
+<br>
+Label5.ForeColor = &HC00000
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End If</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End If</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>Label5_MouseUp(Button<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> Shift<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Integer,</font> X<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single,</font> Y<FONT NAME="Courier New" COLOR="#000080"> As </font><FONT NAME="Courier New" COLOR="#000080"> Single)</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">If</font> Button = 1<FONT NAME="Courier New" COLOR="#000080"> And </font>OverLabel =<FONT NAME="Courier New" COLOR="#000080"> True </font>Then
+<br>
+Label5.ForeColor = &HC0&
+<br>
+wB.Navigate Label5.Caption, -1
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End If</font>
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<HR SIZE="10" WISTH="100%">This page was created by the VB->HTML Compiler, made by Cory J. Geesaman, <A HREF="http://www.naven.net/">http://www.naven.net/</A></BODY>
+</HTML>

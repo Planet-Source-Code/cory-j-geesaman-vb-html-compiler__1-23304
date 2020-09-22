@@ -1,0 +1,80 @@
+<HTML>
+<BODY BGCOLOR="#E0E0E0" TEXT="#000000">
+<FONT SIZE="5" COLOR="#000040">ppClient</FONT>
+<HR SIZE="10" WIDTH="100%">
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>txtRemotePort_Change()
+<br>
+    Changed = True
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>txtRemoteHost_Change()
+<br>
+    Changed = True
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>txtLocalPort_Change()
+<br>
+    Changed = True
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>txtConnectionString_Change()
+<br>
+    Changed = True
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>PropertyPage_ApplyChanges()
+<br>
+    SelectedControls(0).RemotePort = txtRemotePort.Text
+<br>
+    SelectedControls(0).RemoteHost = txtRemoteHost.Text
+<br>
+    SelectedControls(0).LocalPort = txtLocalPort.Text
+<br>
+    SelectedControls(0).ConnectionString = txtConnectionString.Text
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+<FONT NAME="Courier New" COLOR="#000080">Private</font><FONT NAME="Courier New" COLOR="#000080"> Sub </font>PropertyPage_SelectionChanged()
+<br>
+    txtRemotePort.Text = SelectedControls(0).RemotePort
+<br>
+    txtRemoteHost.Text = SelectedControls(0).RemoteHost
+<br>
+    txtLocalPort.Text = SelectedControls(0).LocalPort
+<br>
+    txtConnectionString.Text = SelectedControls(0).ConnectionString
+<br>
+<FONT NAME="Courier New" COLOR="#000080">End Sub</font>
+<br>
+
+<br>
+
+<br>
+
+<HR SIZE="10" WISTH="100%">This page was created by the VB->HTML Compiler, made by Cory J. Geesaman, <A HREF="http://www.naven.net/">http://www.naven.net/</A></BODY>
+</HTML>
